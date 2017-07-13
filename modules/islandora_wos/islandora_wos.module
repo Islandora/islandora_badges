@@ -94,11 +94,13 @@ EOB;
             'timeout' => 10,
           )
           );
-          if (empty($result->error)) {
+
+          if (!isset($result->error)) {
             // Convert the response to an array and remove the CDATA tags.
             $wos_doc = new DOMDocument();
             $wos_doc->loadXML($result->data);
             $xpath = new DOMXPath($wos_doc);
+            $xpath->registerNamespace('wos', 'http://www.isinet.com/xrpc42');
 
             // Default - citing_articles_url - no citing articles = empty array.
             $citing_articles_url = array();
@@ -106,14 +108,14 @@ EOB;
             // XPaths based on
             // http://ipscience-help.thomsonreuters.com/LAMRService/
             // WebServiceOperationsGroup/responseAPIWoS.html
-            $citations = $xpath->query("/fn/map/map[@name=\"cite_1\"]/map[@name=\"WOS\"]");
+            $citations = $xpath->query("/wos:response/wos:fn/wos:map/wos:map[@name=\"cite_1\"]/wos:map[@name=\"WOS\"]");
             if ($citations->length > 0) {
               $context = $citations->item(0);
-              $times_cited_node = $xpath->query("val[@name=\"timesCited\"]", $context);
+              $times_cited_node = $xpath->query("wos:val[@name=\"timesCited\"]", $context);
               if ($times_cited_node->length > 0) {
                 $times_cited = $times_cited_node->item(0)->textContent;
               }
-              $citing_articles_url_node = $xpath->query("val[@name=\"citingArticlesURL\"]", $context);
+              $citing_articles_url_node = $xpath->query("wos:val[@name=\"citingArticlesURL\"]", $context);
               if ($citing_articles_url_node->length > 0) {
                 $citing_articles_url = $citing_articles_url_node->item(0)->textContent;
               }
@@ -123,39 +125,42 @@ EOB;
             if (isset($times_cited) && $times_cited > 0) {
               $badge_type = variable_get('islandora_wos_badgetype');
               if ($badge_type == 'text') {
-                $to_render = array(
-                  '#type' => 'container',
-                  '#attributes' => array(
-                    'class' => array('wos_badge'),
-                  ),
-                  '#children' => array(
-                    '#type' => 'link',
-                    '#title' => t('Web of Science citations: @cites', array('@cites' => $times_cited)),
-                    '#href' => $citing_articles_url,
-                    '#options' => array(
-                      'target' => '_blank',
-                    ),
-                  ),
-                );
-              }
-              else {
-                $img = array(
-                  '#theme' => 'image',
-                  'path' => format_string(
-                    'https://img.shields.io/badge/Web%20of%20Science%20citations-!times_cited-orange.svg?style=flat',
-                    array('!times_cited' => $times_cited)
-                  ),
-                  'alt' => t('Web of Science citations: @cites', array('@cites' => $times_cited)),
-                );
-                $to_render = array(
+                $badge = array(
                   '#type' => 'link',
-                  '#title' => drupal_render($img),
+                  '#title' => t('Web of Science citations: @cites', array('@cites' => $times_cited)),
                   '#href' => $citing_articles_url,
                   '#options' => array(
                     'target' => '_blank',
                   ),
                 );
               }
+              else {
+                $img = array(
+                  '#theme' => 'image',
+                  '#path' => format_string(
+                    'https://img.shields.io/badge/Web%20of%20Science%20citations-!times_cited-orange.svg?style=flat',
+                    array('!times_cited' => $times_cited)
+                  ),
+                  '#alt' => t('Web of Science citations: @cites', array('@cites' => $times_cited)),
+                );
+                $badge = array(
+                  '#type' => 'link',
+                  '#title' => drupal_render($img),
+                  '#href' => $citing_articles_url,
+                  '#options' => array(
+                    'target' => '_blank',
+                    'html' => TRUE,
+                  ),
+                );
+
+              }
+              $to_render['content']['islandora_wos'] = array(
+                '#type' => 'container',
+                '#attributes' => array(
+                  'class' => 'islandora_wos_embed',
+                ),
+                'badge' => $badge,
+              );
             }
           }
         }
