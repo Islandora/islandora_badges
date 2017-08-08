@@ -64,7 +64,8 @@ function islandora_crossref_citations_block_view($delta = '') {
   }
 
   if (isset($result_citation_count) && ($result_citation_count > 0)) {
-    $block_text = variable_get('islandora_crossref_citations_text', 'Citations via Crossref');
+    // Sanitize block text input.
+    $block_text = check_plain(variable_get('islandora_crossref_citations_text', 'Citations via Crossref'));
     $badge_type = variable_get('islandora_crossref_citations_badgetype', 'image');
     if ($badge_type == 'text') {
       $badge = $block_text . ': ' . $result_citation_count;
