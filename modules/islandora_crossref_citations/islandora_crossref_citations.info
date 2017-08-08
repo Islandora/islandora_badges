@@ -1,0 +1,5 @@
+name = Islandora Crossref Citations
+core = 7.x
+description = Islandora Crossref citation counts.
+dependencies[] = islandora_badges
+package = Islandora Tools

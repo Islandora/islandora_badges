@@ -1,0 +1,80 @@
+<?php
+/**
+ * @file
+ * Crossref Citation Badges
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_crossref_citations_menu() {
+  return array(
+    'admin/islandora/tools/badges/crossref' => array(
+      'title' => 'Crossref citations',
+      'description' => 'Configure Crossref Citations settings.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_crossref_citations_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'includes/admin.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function islandora_crossref_citations_block_info() {
+  return array(
+    'islandora_crossref_badge' => array(
+      'visibility' => BLOCK_VISIBILITY_LISTED,
+      'pages' => 'islandora/object/*',
+      'cache' => DRUPAL_CACHE_PER_PAGE,
+      'info' => t('Crossref citations badge'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function islandora_crossref_citations_block_view($delta = '') {
+  module_load_include('inc', 'islandora_badges', 'includes/utilities');
+  $to_render = array();
+  if ($delta == 'islandora_crossref_badge') {
+    $object = menu_get_object('islandora_object', 2);
+    if ($object) {
+      // Check CModel against Badges configuration.
+      if (islandora_badges_show_for_cmodel($object)) {
+          $doi = islandora_badges_get_doi($object);
+          if ($doi) {
+            // Set API endpoint URL
+            // @TODO: Add to admin form.
+            $url = "https://api.crossref.org/works/";
+            $request_url = $url . $doi;
+            // Make the request and get results!
+            if (!isset($result_json->error)) {
+              $result_json = drupal_http_request($request_url);
+              $result_array = json_decode($result_json->data, TRUE);
+              $result_citation_count = $result_array['message']['is-referenced-by-count'];
+          }
+        }
+      }
+    }
+  }
+
+  if (isset($result_citation_count)) {
+    $block_text = variable_get('islandora_crossref_citations_text', 'Citations via Crossref');
+    $badge_type = variable_get('islandora_crossref_citations_badgetype', 'image');
+    if ($badge_type == 'text') {
+      $badge = $block_text . ': ' . $result_citation_count;
+    }
+    else {
+      $badge = '<img src="https://img.shields.io/badge/' . $block_text . '-' . $result_citation_count . '-blue.svg?style=flat" alt="Number of citations via Crossref: ' . $result_citation_count . '">';
+    }
+  }
+  $to_render['content'] = $badge;
+    
+  return $to_render;
+
+} 

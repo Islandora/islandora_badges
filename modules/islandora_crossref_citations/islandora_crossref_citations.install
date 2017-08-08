@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Installation hooks for Crossref Citations badges.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_crossref_citations_uninstall() {
+  $vars = array(
+    islandora_crossref_citations_text,
+    islandora_crossref_citations_badgetype,
+  );
+  array_walk($vars, 'variable_del');
+}
