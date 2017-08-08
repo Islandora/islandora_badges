@@ -54,8 +54,10 @@ function islandora_crossref_citations_block_view($delta = '') {
             $request_url = $url . $doi;
             // Make the request and get results!
             $result_json = drupal_http_request($request_url);
-            $result_array = json_decode($result_json->data, TRUE);
-            $result_citation_count = $result_array['message']['is-referenced-by-count'];
+            if (!isset($result_json->error)) {
+              $result_array = json_decode($result_json->data, TRUE);
+              $result_citation_count = $result_array['message']['is-referenced-by-count'];
+            }
         }
       }
     }
