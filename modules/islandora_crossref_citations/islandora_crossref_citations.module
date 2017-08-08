@@ -71,7 +71,7 @@ function islandora_crossref_citations_block_view($delta = '') {
       $badge = $block_text . ': ' . $result_citation_count;
     }
     else {
-      $badge = '<img src="https://img.shields.io/badge/' . $block_text . '-' . $result_citation_count . '-blue.svg?style=flat" alt="Number of citations via Crossref: ' . $result_citation_count . '">';
+      $badge = '<img src="https://img.shields.io/badge/' . $block_text . '-' . $result_citation_count . '-blue.svg?style=flat" alt="' . t('Number of citations via Crossref: ' . $result_citation_count) . '">';
     }
   $to_render['content'] = $badge;
 
