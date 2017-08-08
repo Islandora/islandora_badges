@@ -53,17 +53,15 @@ function islandora_crossref_citations_block_view($delta = '') {
             $url = "https://api.crossref.org/works/";
             $request_url = $url . $doi;
             // Make the request and get results!
-            if (!isset($result_json->error)) {
-              $result_json = drupal_http_request($request_url);
-              $result_array = json_decode($result_json->data, TRUE);
-              $result_citation_count = $result_array['message']['is-referenced-by-count'];
-          }
+            $result_json = drupal_http_request($request_url);
+            $result_array = json_decode($result_json->data, TRUE);
+            $result_citation_count = $result_array['message']['is-referenced-by-count'];
         }
       }
     }
   }
 
-  if (isset($result_citation_count)) {
+  if (isset($result_citation_count) && ($result_citation_count > 0)) {
     $block_text = variable_get('islandora_crossref_citations_text', 'Citations via Crossref');
     $badge_type = variable_get('islandora_crossref_citations_badgetype', 'image');
     if ($badge_type == 'text') {
@@ -72,8 +70,9 @@ function islandora_crossref_citations_block_view($delta = '') {
     else {
       $badge = '<img src="https://img.shields.io/badge/' . $block_text . '-' . $result_citation_count . '-blue.svg?style=flat" alt="Number of citations via Crossref: ' . $result_citation_count . '">';
     }
-  }
   $to_render['content'] = $badge;
+
+  }
     
   return $to_render;
 

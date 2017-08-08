@@ -11,8 +11,7 @@ The badge will only display on objects with a MODS datastream and a DOI (Digital
 This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/islandora/islandora)
-* [Islandora Scholar](https://github.com/Islandora/islandora_scholar)
-* [Islandora Badges](../../)
+* [Islandora Badges](https://github.com/Islandora/islandora_badges)
 
 ## Installation
 
@@ -24,7 +23,7 @@ Configuration path is admin/islandora/tools/badges/crossref (Administration > Is
 
 Block text: Defines the text used in the citation count block. Defaults to "Citations via Crossref".
 
-Badge type: You can choose between plain text or an automatically-generated image. Plain text is offered for custom styling.
+Badge type: You can choose between plain text or an automatically-generated image from shields.io. Plain text is offered for custom styling.
 
 
 ## Troubleshooting/Issues
