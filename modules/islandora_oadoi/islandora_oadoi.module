@@ -57,8 +57,8 @@ function islandora_oadoi_block_view($delta = '') {
             $request_url = $url . $doi;
 
             // Make the request and get results!
-            if (!isset($result_json->error)) {
               $result_json = drupal_http_request($request_url);
+            if (!isset($result_json->error)) {
               $result_array = json_decode($result_json->data, TRUE);
               $result_free_url = $result_array['results'][0]['free_fulltext_url'];
             }
