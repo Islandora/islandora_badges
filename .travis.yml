@@ -60,3 +60,5 @@ script:
   - drush coder-review --reviews=production,security,style,i18n,potx,sniffer --no-empty islandora_altmetrics
   - drush coder-review --reviews=production,security,style,i18n,potx,sniffer --no-empty islandora_crossref_citations
   - phpcpd --names *.module,*.inc,*.test,*.php sites/all/modules/islandora_altmetrics
+notifications:
+  irc: "irc.freenode.org#islandora"
