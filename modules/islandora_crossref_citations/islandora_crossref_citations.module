@@ -78,7 +78,7 @@ function islandora_crossref_citations_block_view($delta = '') {
         )
       );
     }
-  $to_render['content'] = $badge;
+    $to_render['content'] = $badge;
   }
   return $to_render;
 }
