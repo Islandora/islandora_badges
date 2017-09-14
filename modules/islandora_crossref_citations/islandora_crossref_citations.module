@@ -46,18 +46,18 @@ function islandora_crossref_citations_block_view($delta = '') {
     if ($object) {
       // Check CModel against Badges configuration.
       if (islandora_badges_show_for_cmodel($object)) {
-          $doi = islandora_badges_get_doi($object);
-          if ($doi) {
-            // Set API endpoint URL
-            // @TODO: Add to admin form.
-            $url = "https://api.crossref.org/works/";
-            $request_url = $url . $doi;
-            // Make the request and get results!
-            $result_json = drupal_http_request($request_url);
-            if (!isset($result_json->error)) {
-              $result_array = json_decode($result_json->data, TRUE);
-              $result_citation_count = $result_array['message']['is-referenced-by-count'];
-            }
+        $doi = islandora_badges_get_doi($object);
+        if ($doi) {
+          // Set API endpoint URL
+          // @TODO: Add to admin form.
+          $url = "https://api.crossref.org/works/";
+          $request_url = $url . $doi;
+          // Make the request and get results!
+          $result_json = drupal_http_request($request_url);
+          if (!isset($result_json->error)) {
+            $result_array = json_decode($result_json->data, TRUE);
+            $result_citation_count = $result_array['message']['is-referenced-by-count'];
+          }
         }
       }
     }
@@ -71,12 +71,14 @@ function islandora_crossref_citations_block_view($delta = '') {
       $badge = $block_text . ': ' . $result_citation_count;
     }
     else {
-      $badge = '<img src="https://img.shields.io/badge/' . $block_text . '-' . $result_citation_count . '-blue.svg?style=flat" alt="' . t('Number of citations via Crossref: ' . $result_citation_count) . '">';
+      $badge = format_string('<img src="https://img.shields.io/badge/!block_text-!result_citation_count-blue.svg?style=flat" alt="Number of citations via Crossref: !result_citation_count">',
+        array(
+          '!block_text' => $block_text,
+          '!result_citation_count' => $result_citation_count,
+        )
+      );
     }
   $to_render['content'] = $badge;
-
   }
-    
   return $to_render;
-
-} 
+}
