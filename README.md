@@ -15,7 +15,6 @@ Badges will only display on objects that have a MODS datastream and a DOI (digit
 This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/islandora/islandora)
-* [Islandora Scholar](https://github.com/Islandora/islandora_scholar)
 
 ## Installation
 
@@ -31,7 +30,7 @@ There are two administration fields:
      * The XPath to the DOI element e.g. /mods:mods/mods:identifier[@type="doi"] 
      * A default is included and should serve most repositories, but you can change it if yours is located elsewhere.
 * Content models
-     * Choose which CModels are able to display badges (Currently only applies to Altmetrics)
+     * Choose which CModels are able to display badges.
      
 ## Submodules
 
@@ -40,7 +39,7 @@ These modules provide the actual badges:
 * [Islandora Altmetrics](modules/islandora_altmetrics/)
 * [Islandora Scopus](modules/islandora_scopus/)
 * [Islandora Web of Science](modules/islandora_wos/)
-* [Islandora oaDOI](modules/islandora_oadio/)
+* [Islandora oaDOI](modules/islandora_oadoi/)
 
 ## Troubleshooting/Issues
 
