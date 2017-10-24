@@ -103,7 +103,7 @@ EOB;
               $xpath = new DOMXPath($wos_doc);
               $xpath->registerNamespace('wos', 'http://www.isinet.com/xrpc42');
 
-              // Default - citing_articles_url - no citing articles = empty array.
+              // citing_articles_url - no citing articles = empty array.
               $citing_articles_url = [];
 
               // XPaths based on
