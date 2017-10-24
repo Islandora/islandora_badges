@@ -42,6 +42,10 @@ These modules provide the actual badges:
 * [Islandora oaDOI](modules/islandora_oadoi/)
 * [Islandora Crossref Citations](modules/islandora_crossref_citations)
 
+##Documentation
+
+Further documentation for this module is available at https://wiki.duraspace.org/x/bhpsBQ
+
 ## Troubleshooting/Issues
 
 Having problems or solved a problem? Check out the Islandora google groups for a solution.
