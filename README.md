@@ -30,7 +30,7 @@ There are two administration fields:
      * The XPath to the DOI element e.g. /mods:mods/mods:identifier[@type="doi"] 
      * A default is included and should serve most repositories, but you can change it if yours is located elsewhere.
 * Content models
-     * Choose which CModels are able to display badges.
+     * Choose which CModels are able to display badges. Presently works for all badges except Scopus and Web of Science.
      
 ## Submodules
 
@@ -40,6 +40,7 @@ These modules provide the actual badges:
 * [Islandora Scopus](modules/islandora_scopus/)
 * [Islandora Web of Science](modules/islandora_wos/)
 * [Islandora oaDOI](modules/islandora_oadoi/)
+* [Islandora Crossref Citations](modules/islandora_crossref_citations)
 
 ## Troubleshooting/Issues
 
