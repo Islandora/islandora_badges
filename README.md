@@ -4,6 +4,7 @@
 
 Islandora Badges displays various metrics (and other) badges on objects. Each badge is created by a submodule. Available badges include:
 * Altmetrics: display social media interactions
+* Crossref citations: Citation counts via Crossref
 * Scopus: Citation counts via the Scopus database
 * Web of Science: Citation counts via Web of Science
 * oaDOI: Provides a link to a fulltext document for objects without a PDF datastream, via the oadoi.org API
@@ -30,7 +31,7 @@ There are two administration fields:
      * The XPath to the DOI element e.g. /mods:mods/mods:identifier[@type="doi"] 
      * A default is included and should serve most repositories, but you can change it if yours is located elsewhere.
 * Content models
-     * Choose which CModels are able to display badges. Presently works for all badges except Scopus and Web of Science.
+     * Choose which CModels are able to display badges.
      
 ## Submodules
 
