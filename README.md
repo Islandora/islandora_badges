@@ -28,7 +28,7 @@ Configuration path is admin/islandora/tools/badges (Administration > Islandora >
 There are two administration fields:
 
 * DOI XPath
-     * The XPath to the DOI element e.g. /mods:mods/mods:identifier[@type="doi"] 
+     * The XPath to the DOI element e.g. /mods:mods/mods:identifier[@type="doi"] Note that XPATH is case-sensitive.
      * A default is included and should serve most repositories, but you can change it if yours is located elsewhere.
 * Content models
      * Choose which CModels are able to display badges.
