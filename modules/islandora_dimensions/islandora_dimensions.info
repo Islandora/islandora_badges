@@ -1,0 +1,5 @@
+name = Islandora Dimensions.ai Badge
+core = 7.x
+description = Islandora Dimensions.ai Badge
+dependencies[] = islandora_badges
+package = Islandora Tools

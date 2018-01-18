@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Installation hooks for Islandora Dimensions.ai.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_oadoi_uninstall() {
+  $vars = array(
+    islandora_dimensions_badge,
+  );
+  array_walk($vars, 'variable_del');
+}
