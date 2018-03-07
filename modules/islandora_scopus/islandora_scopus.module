@@ -61,7 +61,7 @@ function islandora_scopus_block_view($delta = '') {
               'apiKey' => $api_key,
               'httpAccept' => 'text/html',
             ]);
-            $scopus_url = "http://api.elsevier.com:80/content/abstract/citation-count?{$data}";
+            $scopus_url = "https://api.elsevier.com/content/abstract/citation-count?{$data}";
             $response = drupal_http_request($scopus_url, ['headers' => $headers]);
             // Hit the API.
             if ($response->code == 200) {
