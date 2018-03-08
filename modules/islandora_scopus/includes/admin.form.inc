@@ -12,7 +12,8 @@ function islandora_scopus_admin_form($form, &$form_state) {
   $form['islandora_scopus_api_endpoint'] = array(
     '#type' => 'textfield',
     '#title' => t('Scopus API Endpoint'),
-    '#description' => t('Scopus query URL. Only change this if Elsevier notifies you that it has changed.'),
+    '#description' => t('Scopus query URL. Currently https://github.com/Islandora/islandora_badges/pull/15.
+    Only change this if Elsevier notifies you that it has changed.'),
     '#default_value' => variable_get('islandora_scopus_api_endpoint', 'https://api.elsevier.com/content/abstract/citation-count'),
   );
   $form['islandora_scopus_api_key'] = array(
