@@ -88,7 +88,7 @@ function islandora_wos_block_view($delta = '') {
 EOB;
 
             // Post the request and get results!
-            $result = drupal_http_request($url, array( 
+            $result = drupal_http_request($url, array(
                 'headers' => array('Content-Type' => 'text/xml'),
                 'data' => $input_xml,
                 'method' => 'POST',
@@ -126,7 +126,7 @@ EOB;
               if (isset($times_cited) && $times_cited > 0) {
                 $badge_type = variable_get('islandora_wos_badgetype');
                 if ($badge_type == 'text') {
-                  $badge = array( 
+                  $badge = array(
                     '#type' => 'link',
                     '#title' => t('Web of Science citations: @cites', array('@cites' => $times_cited)),
                     '#href' => $citing_articles_url,
@@ -144,11 +144,11 @@ EOB;
                     ),
                     '#alt' => t('Web of Science citations: @cites', array('@cites' => $times_cited)),
                   );
-                  $badge = array( 
+                  $badge = array(
                     '#type' => 'link',
                     '#title' => drupal_render($img),
                     '#href' => $citing_articles_url,
-                    '#options' => array( 
+                    '#options' => array(
                       'target' => '_blank',
                       'html' => TRUE,
                     ),
