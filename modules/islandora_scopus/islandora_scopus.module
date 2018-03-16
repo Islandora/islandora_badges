@@ -64,7 +64,6 @@ function islandora_scopus_block_view($delta = '') {
             $scopus_endpoint = variable_get('islandora_scopus_api_endpoint', 'https://api.elsevier.com/content/abstract/citation-count');
             $scopus_query = $scopus_endpoint . '?' . $data;
             $response = drupal_http_request($scopus_query, array('headers' => $headers));
-            
             // Hit the API.
             if ($response->code == 200) {
               if (!preg_match('/alt=\"unavailable\"/', $response->data)) {
