@@ -124,7 +124,7 @@ EOB;
 
               // If there is no error, return data.
               if (isset($times_cited) && $times_cited > 0) {
-                $badge_type = variable_get('islandora_wos_badgetype');
+                $badge_type = variable_get('islandora_wos_badgetype', 'image');
                 if ($badge_type == 'text') {
                   $badge = array(
                     '#type' => 'link',
