@@ -11,6 +11,7 @@
 function islandora_scopus_uninstall() {
   $vars = array(
     'islandora_scopus_api_key',
+    'islandora_scopus_api_endpoint',
   );
   array_walk($vars, 'variable_del');
 }

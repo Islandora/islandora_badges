@@ -55,24 +55,25 @@ function islandora_scopus_block_view($delta = '') {
           }
           // TODO: Extend to allow PMID, etc.
           if (isset($id)) {
-            $headers = ['Accept' => 'text/html', 'X-ELS-APIKey' => $api_key];
-            $data = http_build_query([
+            $headers = array('Accept' => 'text/html', 'X-ELS-APIKey' => $api_key);
+            $data = http_build_query(array(
               'scopus_id' => $id,
               'apiKey' => $api_key,
               'httpAccept' => 'text/html',
-            ]);
-            $scopus_url = "http://api.elsevier.com:80/content/abstract/citation-count?{$data}";
-            $response = drupal_http_request($scopus_url, ['headers' => $headers]);
+            ));
+            $scopus_endpoint = variable_get('islandora_scopus_api_endpoint', 'https://api.elsevier.com/content/abstract/citation-count');
+            $scopus_query = $scopus_endpoint . '?' . $data;
+            $response = drupal_http_request($scopus_query, array('headers' => $headers));
             // Hit the API.
             if ($response->code == 200) {
               if (!preg_match('/alt=\"unavailable\"/', $response->data)) {
-                $to_render['content']['islandora_scopus'] = [
+                $to_render['content']['islandora_scopus'] = array(
                   '#type' => 'container',
-                  '#attributes' => [
+                  '#attributes' => array(
                     'class' => 'islandora_scopus_embed',
-                  ],
+                  ),
                   '#children' => $response->data,
-                ];
+                );
               }
             }
           }
