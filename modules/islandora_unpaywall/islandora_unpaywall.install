@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Installation hooks for Unpaywall badge.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_unpaywall_uninstall() {
+  $vars = array(
+    islandora_unpaywall_linktext,
+    islandora_unpaywall_email,
+    islandora_unpaywall_api_endpoint,
+  );
+  array_walk($vars, 'variable_del');
+}

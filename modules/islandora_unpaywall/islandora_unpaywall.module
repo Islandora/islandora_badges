@@ -1,19 +1,19 @@
 <?php
 /**
  * @file
- * oaDOI Badges
+ * Unpaywall Badge
  */
 
 /**
  * Implements hook_menu().
  */
-function islandora_oadoi_menu() {
+function islandora_unpaywall_menu() {
   return array(
-    'admin/islandora/tools/badges/oadoi' => array(
-      'title' => 'oaDOI',
-      'description' => 'Configure oaDOI settings.',
+    'admin/islandora/tools/badges/unpaywall' => array(
+      'title' => 'Unpaywall',
+      'description' => 'Configure Unpaywall settings.',
       'page callback' => 'drupal_get_form',
-      'page arguments' => array('islandora_oadoi_admin_form'),
+      'page arguments' => array('islandora_unpaywall_admin_form'),
       'access arguments' => array('administer site configuration'),
       'type' => MENU_LOCAL_TASK,
       'file' => 'includes/admin.form.inc',
@@ -24,13 +24,13 @@ function islandora_oadoi_menu() {
 /**
  * Implements hook_block_info().
  */
-function islandora_oadoi_block_info() {
+function islandora_unpaywall_block_info() {
   return array(
-    'islandora_oadoi_badge' => array(
+    'islandora_unpaywall_badge' => array(
       'visibility' => BLOCK_VISIBILITY_LISTED,
       'pages' => 'islandora/object/*',
       'cache' => DRUPAL_CACHE_PER_PAGE,
-      'info' => t('Islandora oaDOI Link'),
+      'info' => t('Islandora Unpaywall Link'),
     ),
   );
 }
@@ -38,11 +38,11 @@ function islandora_oadoi_block_info() {
 /**
  * Implements hook_block_view().
  */
-function islandora_oadoi_block_view($delta = '') {
+function islandora_unpaywall_block_view($delta = '') {
   module_load_include('inc', 'islandora_badges', 'includes/utilities');
   $to_render = array();
 
-  if ($delta == 'islandora_oadoi_badge') {
+  if ($delta == 'islandora_unpaywall_badge') {
     $object = menu_get_object('islandora_object', 2);
     if ($object) {
       // Check CModel against Badges configuration.
@@ -51,16 +51,15 @@ function islandora_oadoi_block_view($delta = '') {
         if (!$object['PDF']) {
           $doi = islandora_badges_get_doi($object);
           if ($doi) {
-            // Set API endpoint URL
-            // @TODO: Add to admin form.
-            $url = "https://api.oadoi.org/";
-            $request_url = $url . $doi;
-
+            // Get variables and generate URL for API call.
+            $email = variable_get('islandora_unpaywall_email', 'email@example.com');
+            $url = variable_get('islandora_unpaywall_api_endpoint', 'https://api.unpaywall.org/v2/');
+            $request_url = $url . $doi . '?email=' . $email;
             // Make the request and get results!
             $result_json = drupal_http_request($request_url);
             if (!isset($result_json->error)) {
               $result_array = json_decode($result_json->data, TRUE);
-              $result_free_url = $result_array['results'][0]['free_fulltext_url'];
+              $result_free_url = $result_array['best_oa_location']['url'];
             }
           }
         }
@@ -70,10 +69,10 @@ function islandora_oadoi_block_view($delta = '') {
 
   if (isset($result_free_url)) {
     global $base_url;
-    // If oaDOI points to the current website, do not display block.
+    // If Unpaywall points to the current website, do not display block.
     if (strpos($result_free_url, $base_url) !== 0) {
-      $link_text = variable_get('islandora_oadoi_linktext', 'Link to PDF');
-      $to_render['content'] = '<div class="oadoi"><a href="' . $result_free_url . '" target="_blank">' . $link_text . '</a></div>';
+      $link_text = variable_get('islandora_unpaywall_linktext', 'Link to PDF');
+      $to_render['content'] = '<div class="unpaywall"><a href="' . $result_free_url . '" target="_blank">' . $link_text . '</a></div>';
     }
   }
   return $to_render;

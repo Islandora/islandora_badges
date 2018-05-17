@@ -1,8 +1,8 @@
-# Islandora oaDOI
+# Islandora Unpaywall
 
 ## Introduction
 
-Islandora oaDOI provides block containing a link to an open-access version of a citation-only object. It uses the API from oadoi.org. 
+Islandora Unpaywall provides block containing a link to an open-access version of a citation-only object. It uses the API from unpaywall.org. 
 
 The badge will only display on objects with a MODS datastream and a DOI (Digital Object Identifier).
 
@@ -11,7 +11,6 @@ The badge will only display on objects with a MODS datastream and a DOI (Digital
 This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/islandora/islandora)
-* [Islandora Scholar](https://github.com/Islandora/islandora_scholar)
 * [Islandora Badges](../../)
 
 ## Installation
@@ -20,12 +19,12 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 ## Configuration
 
-Configuration path is admin/islandora/tools/badges/wos (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration > oaDOI).
+Configuration path is admin/islandora/tools/badges/unpaywall (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration > Unpaywall).
 
 Link text: Defines the text used in the PDF link. Defaults to "Link to PDF".
 
 ## Styling
-The link text is enclosed in a block with the class "oadoi". This can be styled with CSS.
+The link text is enclosed in a block with the class "unpaywall". This can be styled with CSS.
 
 ## Troubleshooting/Issues
 
