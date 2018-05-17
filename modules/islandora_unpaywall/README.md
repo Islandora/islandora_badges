@@ -21,7 +21,9 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 Configuration path is admin/islandora/tools/badges/unpaywall (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration > Unpaywall).
 
-Link text: Defines the text used in the PDF link. Defaults to "Link to PDF".
+* Link text: Defines the text used in the PDF link. Defaults to "Link to PDF".
+* Email: The Unpaywall API now requires an email address appended to every call.
+* API endpoint: The correct, current one is given by default. This is done in case the endpoint changes in the future.
 
 ## Styling
 The link text is enclosed in a block with the class "unpaywall". This can be styled with CSS.
