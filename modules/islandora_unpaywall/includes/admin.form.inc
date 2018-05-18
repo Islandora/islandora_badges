@@ -3,6 +3,7 @@
  * @file
  * Unpaywall badge admin options
  */
+
 /**
  * Admin form: configure PDF link text.
  */
