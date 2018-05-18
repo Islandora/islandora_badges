@@ -4,7 +4,7 @@
 
 Islandora Unpaywall provides block containing a link to an open-access version of a citation-only object. It uses the API from unpaywall.org. 
 
-The badge will only display on objects with a MODS datastream and a DOI (Digital Object Identifier).
+The badge will only display on objects with a MODS datastream and a DOI (Digital Object Identifier). See https://unpaywall.org/products/api for API details and limitations.
 
 ## Requirements
 
