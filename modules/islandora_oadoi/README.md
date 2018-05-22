@@ -6,6 +6,11 @@ Islandora oaDOI provides block containing a link to an open-access version of a 
 
 The badge will only display on objects with a MODS datastream and a DOI (Digital Object Identifier).
 
+## Notice
+
+Islandora oaDOI has been deprecated as of 7.x-1.11 in favour of [Islandora Unpaywall](../islandora_unpaywall/). 
+The oaDOI service has changed its name and its API endpoint. Since the oaDOI API has been deprected, Islandora oaDOI no longer works.
+
 ## Requirements
 
 This module requires the following modules/libraries:
