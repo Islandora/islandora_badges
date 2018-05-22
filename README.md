@@ -7,7 +7,8 @@ Islandora Badges displays various metrics (and other) badges on objects. Each ba
 * Crossref citations: Citation counts via Crossref
 * Scopus: Citation counts via the Scopus database
 * Web of Science: Citation counts via Web of Science
-* oaDOI: Provides a link to a fulltext document for objects without a PDF datastream, via the oadoi.org API
+* oaDOI: Provides a link to a fulltext document for objects without a PDF datastream, via the oadoi.org API (Deprecated as of 7.x-1.11)
+* Unpaywall: Provides a link to a fulltext document for objects without a PDF datastream, via the oadoi.org API
 
 Badges will only display on objects that have a MODS datastream and a DOI (digital object identifier). The xpath to the DOI field is configurable.
 
@@ -40,7 +41,8 @@ These modules provide the actual badges:
 * [Islandora Altmetrics](modules/islandora_altmetrics/)
 * [Islandora Scopus](modules/islandora_scopus/)
 * [Islandora Web of Science](modules/islandora_wos/)
-* [Islandora oaDOI](modules/islandora_oadoi/)
+* [Islandora oaDOI (Deprecated)](modules/islandora_oadoi/)
+* [Islandora Unpaywall](modules/islandora_unpaywall/)
 * [Islandora Crossref Citations](modules/islandora_crossref_citations)
 
 ##Documentation
