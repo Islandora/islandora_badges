@@ -25,6 +25,8 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 Configuration path is admin/islandora/tools/badges (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration).
 
+![Islandora Badges Configuration](https://user-images.githubusercontent.com/2738244/40321590-8ab50706-5cfd-11e8-9e08-82fe22ba6369.png)
+
 There are two administration fields:
 
 * DOI XPath
