@@ -20,10 +20,6 @@ function islandora_oadoi_uninstall() {
  * Deprecate and uninstall Islandora oaDOI module.
  */
 function islandora_oadoi_update_7100() {
-  if (module_exists('islandora_oadoi')) {
-    module_disable(array('islandora_oadoi'));
-    drupal_uninstall_modules(array('islandora_oadoi'));
-  }
   return t('Islandora oaDOI has been deprecated as the oaDOI service has been replaced by Unpaywall.
   Please install, enable, and configure Islandora Unpaywall to regain this functionality.');
 }
