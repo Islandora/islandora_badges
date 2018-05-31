@@ -13,8 +13,9 @@ function islandora_unpaywall_install() {
     variable_set('islandora_unpaywall_linktext', $linktext);
     module_disable(array('islandora_oadoi'));
     drupal_uninstall_modules(array('islandora_oadoi'));
-    drupal_set_message(t('Islandora oaDOI has been uninstalled and replaced by Islandora Unpaywall. Please check the module configuration
-    to ensure your settings have been preserved.'), 'status');
+    $t = get_t('Islandora oaDOI has been uninstalled and replaced by Islandora Unpaywall. Please check the module configuration
+    to ensure your settings have been preserved.');
+    drupal_set_message($t, 'status');
   }
 }
 
