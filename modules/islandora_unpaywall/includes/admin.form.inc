@@ -26,5 +26,9 @@ function islandora_unpaywall_admin_form($form, $form_settings) {
     '#description' => t('Defaults to https://api.unpaywall.org/v2/. Do not change without good reason.'),
     '#default_value' => variable_get('islandora_unpaywall_api_endpoint', 'https://api.unpaywall.org/v2/'),
   );
+  $email = variable_get('islandora_unpaywall_email', 'email@example.com');
+  if ($email == 'email@example.com' || $email == '') {
+    drupal_set_message(t('The Unpaywall API requires a valid email address.'), 'warning');
+  }
   return system_settings_form($form);
 }
