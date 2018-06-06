@@ -53,6 +53,9 @@ function islandora_unpaywall_block_view($delta = '') {
           if ($doi) {
             // Get variables and generate URL for API call.
             $email = variable_get('islandora_unpaywall_email', 'email@example.com');
+            if ($email == 'email@example.com' || $email == '') {
+              drupal_set_message(t('The Unpaywall API requires a valid email address. Set one in the Islandora Unpaywall configuration.'), 'warning');
+            }
             $url = variable_get('islandora_unpaywall_api_endpoint', 'https://api.unpaywall.org/v2/');
             $request_url = $url . $doi . '?email=' . $email;
             // Make the request and get results!
