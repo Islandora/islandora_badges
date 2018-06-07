@@ -43,6 +43,12 @@ function islandora_oadoi_block_view($delta = '') {
   $to_render = array();
 
   if ($delta == 'islandora_oadoi_badge') {
+    $message = format_string('The Module @modulename as of 7.x-1.11 has been deprecated in favour of  @othermodulename .', array(
+      '@modulename' => 'Islandora oaDOI',
+      '@othermodulename' => 'Islandora Unpaywall',
+       )
+    );
+    trigger_error(filter_xss($message), E_USER_DEPRECATED);
     $object = menu_get_object('islandora_object', 2);
     if ($object) {
       // Check CModel against Badges configuration.

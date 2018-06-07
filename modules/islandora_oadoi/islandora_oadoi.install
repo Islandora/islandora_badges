@@ -9,7 +9,17 @@
  */
 function islandora_oadoi_uninstall() {
   $vars = array(
-    islandora_oadoi_linktext,
+    'islandora_oadoi_linktext',
   );
   array_walk($vars, 'variable_del');
+}
+
+/**
+ * Implements hook_update().
+ *
+ * Deprecate and uninstall Islandora oaDOI module.
+ */
+function islandora_oadoi_update_7100() {
+  return t('Islandora oaDOI has been deprecated as the oaDOI service has been replaced by Unpaywall.
+  Please install, enable, and configure Islandora Unpaywall to regain this functionality.');
 }
