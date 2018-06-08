@@ -1,22 +1,16 @@
-# Islandora oaDOI
+# Islandora Unpaywall
 
 ## Introduction
 
-Islandora oaDOI provides block containing a link to an open-access version of a citation-only object. It uses the API from oadoi.org. 
+Islandora Unpaywall provides block containing a link to an open-access version of a citation-only object. It uses the API from unpaywall.org. 
 
-The badge will only display on objects with a MODS datastream and a DOI (Digital Object Identifier).
-
-## Notice
-
-Islandora oaDOI has been deprecated as of 7.x-1.11 in favour of [Islandora Unpaywall](../islandora_unpaywall/). 
-The oaDOI service has changed its name and its API endpoint. Since the oaDOI API has been deprected, Islandora oaDOI no longer works.
+The badge will only display on objects with a MODS datastream and a DOI (Digital Object Identifier). See https://unpaywall.org/products/api for API details and limitations.
 
 ## Requirements
 
 This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/islandora/islandora)
-* [Islandora Scholar](https://github.com/Islandora/islandora_scholar)
 * [Islandora Badges](../../)
 
 ## Installation
@@ -25,12 +19,14 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 ## Configuration
 
-Configuration path is admin/islandora/tools/badges/wos (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration > oaDOI).
+Configuration path is admin/islandora/tools/badges/unpaywall (Administration > Islandora > Islandora Utility Modules > Islandora Badges Configuration > Unpaywall).
 
-Link text: Defines the text used in the PDF link. Defaults to "Link to PDF".
+* Link text: Defines the text used in the PDF link. Defaults to "Link to PDF".
+* Email: The Unpaywall API now requires an email address appended to every call.
+* API endpoint: The correct, current one is given by default. This is done in case the endpoint changes in the future.
 
 ## Styling
-The link text is enclosed in a block with the class "oadoi". This can be styled with CSS.
+The link text is enclosed in a block with the class "unpaywall". This can be styled with CSS.
 
 ## Troubleshooting/Issues
 

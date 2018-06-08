@@ -1,5 +1,5 @@
-name = Islandora oaDOI
+name = Islandora oaDOI (Deprecated)
 core = 7.x
-description = Islandora oaDOI linking.
+description = Islandora oaDOI linking - Deprecated in favour of Islandora Unpaywall (islandora_unpaywall).
 dependencies[] = islandora_badges
 package = Islandora Tools

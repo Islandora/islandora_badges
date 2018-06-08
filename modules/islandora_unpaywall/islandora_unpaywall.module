@@ -1,0 +1,82 @@
+<?php
+/**
+ * @file
+ * Unpaywall Badge
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_unpaywall_menu() {
+  return array(
+    'admin/islandora/tools/badges/unpaywall' => array(
+      'title' => 'Unpaywall',
+      'description' => 'Configure Unpaywall settings.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_unpaywall_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'includes/admin.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function islandora_unpaywall_block_info() {
+  return array(
+    'islandora_unpaywall_badge' => array(
+      'visibility' => BLOCK_VISIBILITY_LISTED,
+      'pages' => 'islandora/object/*',
+      'cache' => DRUPAL_CACHE_PER_PAGE,
+      'info' => t('Islandora Unpaywall Link'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function islandora_unpaywall_block_view($delta = '') {
+  module_load_include('inc', 'islandora_badges', 'includes/utilities');
+  $to_render = array();
+
+  if ($delta == 'islandora_unpaywall_badge') {
+    $object = menu_get_object('islandora_object', 2);
+    if ($object) {
+      // Check CModel against Badges configuration.
+      if (islandora_badges_show_for_cmodel($object)) {
+        // Check for PDF datastream; only run if PDF does not exist.
+        if (!$object['PDF']) {
+          $doi = islandora_badges_get_doi($object);
+          if ($doi) {
+            // Get variables and generate URL for API call.
+            $email = variable_get('islandora_unpaywall_email', 'email@example.com');
+            if ($email == 'email@example.com' || $email == '') {
+              drupal_set_message(t('The Unpaywall API requires a valid email address. Set one in the Islandora Unpaywall configuration.'), 'warning');
+            }
+            $url = variable_get('islandora_unpaywall_api_endpoint', 'https://api.unpaywall.org/v2/');
+            $request_url = $url . $doi . '?email=' . $email;
+            // Make the request and get results!
+            $result_json = drupal_http_request($request_url);
+            if (!isset($result_json->error)) {
+              $result_array = json_decode($result_json->data, TRUE);
+              $result_free_url = $result_array['best_oa_location']['url'];
+            }
+          }
+        }
+      }
+    }
+  }
+
+  if (isset($result_free_url)) {
+    global $base_url;
+    // If Unpaywall points to the current website, do not display block.
+    if (strpos($result_free_url, $base_url) !== 0) {
+      $link_text = variable_get('islandora_unpaywall_linktext', 'Link to PDF');
+      $to_render['content'] = '<div class="unpaywall"><a href="' . $result_free_url . '" target="_blank">' . $link_text . '</a></div>';
+    }
+  }
+  return $to_render;
+}

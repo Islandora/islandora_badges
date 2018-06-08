@@ -61,6 +61,7 @@ function islandora_altmetrics_block_view($delta) {
                 'data-doi' => $doi,
                 'data-badge-popover' => variable_get('islandora_altmetrics_popover', 'right'),
                 'data-hide-no-mentions' => 'true',
+                'data-link-target' => '_blank',
               ),
             );
             drupal_add_js('https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js', 'external');

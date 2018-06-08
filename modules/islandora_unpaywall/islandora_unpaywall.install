@@ -1,0 +1,33 @@
+<?php
+/**
+ * @file
+ * Installation hooks for Unpaywall badge.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function islandora_unpaywall_install() {
+  if (module_exists('islandora_oadoi')) {
+    $linktext = variable_get('islandora_oadoi_linktext');
+    variable_set('islandora_unpaywall_linktext', $linktext);
+    module_disable(array('islandora_oadoi'));
+    drupal_uninstall_modules(array('islandora_oadoi'));
+    $t = get_t();
+    $translated = $t('Islandora oaDOI has been uninstalled and replaced by Islandora Unpaywall. Please check the module configuration
+    to ensure your settings have been preserved.');
+    drupal_set_message(filter_xss($translated), 'status');
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_unpaywall_uninstall() {
+  $vars = array(
+    'islandora_unpaywall_linktext',
+    'islandora_unpaywall_email',
+    'islandora_unpaywall_api_endpoint',
+  );
+  array_walk($vars, 'variable_del');
+}
