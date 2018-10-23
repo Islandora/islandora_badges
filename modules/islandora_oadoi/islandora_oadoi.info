@@ -1,4 +1,5 @@
 name = Islandora oaDOI (Deprecated)
+version = 7.x-1.12
 core = 7.x
 description = Islandora oaDOI linking - Deprecated in favour of Islandora Unpaywall (islandora_unpaywall).
 dependencies[] = islandora_badges

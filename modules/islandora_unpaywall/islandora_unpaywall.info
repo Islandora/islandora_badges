@@ -1,4 +1,5 @@
 name = Islandora Unpaywall
+version = 7.x-1.12
 core = 7.x
 description = Islandora Unpaywall linking.
 dependencies[] = islandora_badges

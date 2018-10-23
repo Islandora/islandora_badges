@@ -1,4 +1,5 @@
 name = Islandora Scopus Badge
+version = 7.x-1.12
 core = 7.x
 description = Islandora Scopus integration.
 dependencies[] = islandora_badges
