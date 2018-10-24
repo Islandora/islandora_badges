@@ -1,4 +1,5 @@
 name = Islandora Crossref Citations
+version = 7.x-dev
 core = 7.x
 description = Islandora Crossref citation counts.
 dependencies[] = islandora_badges
