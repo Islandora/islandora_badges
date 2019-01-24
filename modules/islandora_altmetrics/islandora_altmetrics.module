@@ -47,24 +47,28 @@ function islandora_altmetrics_block_view($delta) {
     if ($object) {
       if (islandora_badges_show_for_cmodel($object)) {
         // Use new customizable list of cmodels.
-        $doi = islandora_badges_get_doi($object);
-        if ($doi) {
-          // Only generate block if a result exists - check API callback.
-          $file_headers = @get_headers("http://api.altmetric.com/v1/doi/" . $doi . "?callback=my_callback");
-          if ($file_headers['0'] != 'HTTP/1.1 404 Not Found') {
-            // Embed Altmetrics.
-            $to_render['content']['altmetrics'] = array(
-              '#type' => 'container',
-              '#attributes' => array(
-                'class' => array('altmetric-embed'),
-                'data-badge-type' => variable_get('islandora_altmetrics_badge', 'Default'),
-                'data-doi' => $doi,
-                'data-badge-popover' => variable_get('islandora_altmetrics_popover', 'right'),
-                'data-hide-no-mentions' => 'true',
-                'data-link-target' => '_blank',
-              ),
-            );
-            drupal_add_js('https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js', 'external');
+        foreach (islandora_badges_get_identifier_types() as $id_type => $id_vars) {
+          $id_xpath = $id_vars['xpath'];
+          $id_value = islandora_badges_get_identifier_value($object, $id_type, $id_xpath);
+          if ($id_value) {
+            // Only generate block if a result exists - check API callback.
+            $file_headers = @get_headers("http://api.altmetric.com/v1/" . $id_type . "/" . $id_value . "?callback=my_callback");
+            if ($file_headers['0'] != 'HTTP/1.1 404 Not Found') {
+              // Embed Altmetrics.
+              $to_render['content']['altmetrics'] = array(
+                '#type' => 'container',
+                '#attributes' => array(
+                  'class' => array('altmetric-embed'),
+                  'data-badge-type' => variable_get('islandora_altmetrics_badge', 'Default'),
+                  'data-' . $id_type => $id_value,
+                  'data-badge-popover' => variable_get('islandora_altmetrics_popover', 'right'),
+                  'data-hide-no-mentions' => 'true',
+                  'data-link-target' => '_blank',
+                ),
+              );
+              drupal_add_js('https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js', 'external');
+              break;
+            }
           }
         }
       }

@@ -67,30 +67,13 @@ function islandora_badges_admin_form($form, $form_settings) {
   );
 
   module_load_include('inc', 'islandora', 'includes/utilities');
+  module_load_include('inc', 'islandora_badges', 'includes/utilities');
 
   $all_cmodels = islandora_get_content_models();
   $already_chosen = variable_get('islandora_badges_selected_cmodels', array('ir:citationCModel', 'ir:thesisCModel'));
   $selected_rows = drupal_map_assoc($already_chosen);
 
-  $identifiers = array(
-    'doi' => array(
-      'xpath' => variable_get('islandora_badges_doi_xpath', '/mods:mods/mods:identifier[@type="doi"]'),
-      'weight' => variable_get('islandora_badges_doi_weight', 0),
-    ),
-    'handle' => array(
-      'xpath' => variable_get('islandora_badges_hdl_xpath', '/mods:mods/mods:identifier[@type="hdl"]'),
-      'weight' => variable_get('islandora_badges_hdl_weight', 1),
-    ),
-    'uri' => array(
-      'xpath' => variable_get('islandora_badges_uri_xpath', '/mods:mods/mods:identifier[@type="uri"]'),
-      'weight' => variable_get('islandora_badges_uri_weight', 2)
-    ),
-  );
-  // Sort by weight.
-  uasort($identifiers, function($a, $b) {
-    return $a['weight'] - $b['weight'];
-  });
-
+  $identifiers = islandora_badges_get_identifier_types();
   $form['islandora_badges_identifier_table'] = array(
     '#title' => t('Identifier Fields'),
     '#type' => 'item',
