@@ -52,8 +52,9 @@ function islandora_altmetrics_block_view($delta) {
           $id_value = islandora_badges_get_identifier_value($object, $id_type, $id_xpath);
           if ($id_value) {
             // Only generate block if a result exists - check API callback.
-            $file_headers = @get_headers("http://api.altmetric.com/v1/" . $id_type . "/" . $id_value . "?callback=my_callback");
-            if ($file_headers['0'] != 'HTTP/1.1 404 Not Found') {
+            $altmetrics_api_url = 'http://api.altmetric.com/v1/' . $id_type . '/' . $id_value . '?callback=my_callback';
+            $head_response = @drupal_http_request($altmetrics_api_url, array('method' => 'HEAD'));
+            if ($head_response->code != 404) {
               // Embed Altmetrics.
               $to_render['content']['altmetrics'] = array(
                 '#type' => 'container',
