@@ -77,7 +77,7 @@ function islandora_badges_admin_form($form, $form_settings) {
   $form['islandora_badges_identifier_table'] = array(
     '#title' => t('Identifier Fields'),
     '#type' => 'item',
-    '#description' => t('MODS XPaths for retrieving identifier information. Set weights to change the order of identifiers to look for. DOI is first by default.'),
+    '#description' => t('MODS XPaths for retrieving identifier information. Set weights to change the order of identifiers to look for. DOI is first by default. Note that Xpaths are case-sensitive.'),
     '#tree' => TRUE,
     '#theme' => 'islandora_badges_admin_identifier_fields',
   );
