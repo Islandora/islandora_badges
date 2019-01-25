@@ -82,7 +82,7 @@ function islandora_badges_admin_form($form, $form_settings) {
     '#theme' => 'islandora_badges_admin_identifier_fields',
   );
 
-  $terms = [];
+  $terms = array();
   foreach ($identifiers as $name => $value) {
     $terms[$name] = array(
       'draggable_handler' => array(
