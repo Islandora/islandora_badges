@@ -53,7 +53,7 @@ function islandora_altmetrics_block_view($delta) {
           if ($id_value) {
             // Only generate block if a result exists - check API callback.
             $altmetrics_api_url = 'http://api.altmetric.com/v1/' . $id_type . '/' . $id_value . '?callback=my_callback';
-            $head_response = @drupal_http_request($altmetrics_api_url, array('method' => 'HEAD'));
+            $head_response = drupal_http_request($altmetrics_api_url, array('method' => 'HEAD'));
             if ($head_response->code != 404) {
               // Embed Altmetrics.
               $to_render['content']['altmetrics'] = array(
