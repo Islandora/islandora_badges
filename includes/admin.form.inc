@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Admin form functions for Islandora Altmetrics.
+ * Admin form functions for Islandora Badges.
  */
 
 /**
