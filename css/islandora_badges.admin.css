@@ -1,0 +1,27 @@
+/* Admin style sheet for islandora badges */
+
+/* drag handler placeholder cell */
+.islandora-badges-multiple-drag
+{
+  width: 30px;
+}
+
+.form-item .islandora-badges-identifiers-header
+{
+  width: 35%;
+}
+
+html.js table span.tabledrag-changed
+{
+  position: absolute;
+}
+
+html.js .islandora-badges-identifiers-table .islandora-badges-identifier-field-weight
+{
+  display: none;
+}
+
+html.js .islandora-badges-identifiers-table .islandora-badges-identifier-field-weight.tabledrag-hide
+{
+  display: table-cell;
+}

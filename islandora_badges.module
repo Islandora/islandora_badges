@@ -6,6 +6,20 @@
  */
 
 /**
+ * Implements hook_theme().
+ */
+function islandora_badges_theme() {
+  $path = drupal_get_path('module', 'islandora_badges');
+  return array(
+    'islandora_badges_admin_identifier_fields' => array(
+      'path' => $path,
+      'file' => 'includes/admin.form.inc',
+      'render element' => 'form',
+    ),
+  );
+}
+
+/**
  * Implements hook_menu().
  */
 function islandora_badges_menu() {
