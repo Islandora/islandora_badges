@@ -56,6 +56,10 @@ function islandora_badges_get_identifier_value(AbstractObject $object, $identifi
     // Need to strip the handle URL bit.
     return str_replace('http://hdl.handle.net/', '', $node_value);
   }
+  elseif ($node_value && $identifier_type == 'doi' && strpos(strtolower($node_value), 'doi:') === 0) {
+    // If you have doi: at the start of your doi, remove it.
+    return substr($node_value, 4);
+  }
   else {
     return $node_value;
   }
@@ -97,6 +101,8 @@ function islandora_badges_get_xpath_node_value(AbstractObject $object, $xpath) {
  * Prefer islandora_badges_get_identifier_value().
  * This is for backwards compatibility.
  *
+ * @deprecated Use islandora_badges_get_identifier_value() instead.
+ *
  * @param \AbstractObject $object
  *   The Fedora object.
  *
@@ -105,7 +111,7 @@ function islandora_badges_get_xpath_node_value(AbstractObject $object, $xpath) {
  */
 function islandora_badges_get_doi(AbstractObject $object) {
   $doi_xpath = variable_get('islandora_badges_doi_xpath', '/mods:mods/mods:identifier[@type="doi"]');
-  return islandora_badges_get_xpath_node_value($object, $doi_xpath);
+  return islandora_badges_get_identifier_value($object, 'doi', $doi_xpath);
 }
 
 /**
