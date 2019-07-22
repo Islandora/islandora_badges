@@ -1,5 +1,5 @@
 name = Islandora Web of Science Badge
-version = 7.x-dev
+version = 7.x-1.13
 core = 7.x
 description = Islandora Web of Science integration.
 dependencies[] = islandora_badges
