@@ -47,7 +47,7 @@ These modules provide the actual badges:
 * [Islandora Unpaywall](modules/islandora_unpaywall/)
 * [Islandora Crossref Citations](modules/islandora_crossref_citations)
 
-##Documentation
+## Documentation
 
 Further documentation for this module is available at https://wiki.duraspace.org/x/bhpsBQ
 
